@@ -29,3 +29,13 @@ bld/
 msbuild.log
 msbuild.err
 msbuild.wrn
+/.vs/suffrageapp
+/wwwroot/lib/bootstrap/LICENSE
+/wwwroot/lib/jquery/LICENSE.txt
+/wwwroot/lib/jquery-validation/LICENSE.md
+/wwwroot/lib/jquery-validation-unobtrusive/LICENSE.txt
+/SuffrageApp/.vs/SuffrageApp/v16/Server/sqlite3
+/SuffrageApp/SuffrageApp/wwwroot/lib/bootstrap/LICENSE
+/SuffrageApp/SuffrageApp/wwwroot/lib/jquery/LICENSE.txt
+/SuffrageApp/SuffrageApp/wwwroot/lib/jquery-validation/LICENSE.md
+/SuffrageApp/SuffrageApp/wwwroot/lib/jquery-validation-unobtrusive/LICENSE.txt
