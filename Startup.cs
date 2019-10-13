@@ -24,6 +24,9 @@ namespace SuffrageApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddMvc()
+                .AddRazorRuntimeCompilation()
+                .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,7 +44,7 @@ namespace SuffrageApp
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            
             app.UseRouting();
 
             app.UseAuthorization();
