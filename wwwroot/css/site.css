@@ -1,36 +1,74 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
-
-
-/* Sticky footer styles
--------------------------------------------------- */
-
-
+﻿/* bootstrap */
 
 .list-group-item {
+    position: relative;
     border-bottom-left-radius: 15px !important;
     border-top-left-radius: 15px !important;
     margin-top: 4px;
     border: 0px;
-display: flex;
+    display: flex;
+    transition: 1s all;
     background-color: rgba(255, 255, 255, 0) !important;
+    left: 0px;
 }
 
 .list-group-item:hover {
     background-color: rgba(255, 255, 255, 0.3) !important;
     color: white !important;
+    left: 35px;
 }
 
-.active {
+.selected {
     background-color: rgba(255, 255, 255, 1) !important;
     color: black !important;
 }
 
-.active:hover {
+.selected:hover {
     background-color: rgba(255, 255, 255, 1) !important;
     color: black !important;
+    left:0;
 }
 
 .btn {
     border-radius: 15px !important;
+}
+
+/* elements */
+.border-radius {
+    border-radius: 15px;
+}
+
+.leftBackgroundBlock {
+    width: 20%;
+    height: 100vh;
+    position: sticky;
+    top: 0
+}
+
+.leftRoundedBlock {
+    border-radius: 15px;
+    background-image: url(/3.jpg);
+    height: 100%;
+}
+
+.rightBackgroundBlock {
+    width: 80%
+}
+
+@keyframes fade-in {
+    0% {
+        color: white;
+        background-color: rgba(255, 255, 255, 0.3);
+        left:40px;
+    }
+
+    100% {
+        color: black;
+        background-color: rgba(255, 255, 255, 1);
+        left: 0px;
+    }
+}
+
+.selected {
+    animation: fade-in 0.5s ease;
 }
