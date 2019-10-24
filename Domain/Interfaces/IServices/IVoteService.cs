@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Core.Interfaces.Services
 {
-    interface IPollService
+    public interface IVoteService
     {
-        Poll GetPoll(int id);
-
+        List<Vote> GetVotesByUser(int id);
+        List<Vote> GetVotesByPoll(int id);
     }
 }

@@ -10,7 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Core.Mapping;
+using Core.Services;
+using Core.Interfaces.Services;
 
 namespace SuffrageApp
 {
@@ -36,7 +37,9 @@ namespace SuffrageApp
             //            o.UseSqlServer(connectionString);
             //        });
 
-
+            services
+                .AddTransient<IPollService, PollService>()
+                .AddTransient<IVoteService, VoteService>(); 
 
         }
 
