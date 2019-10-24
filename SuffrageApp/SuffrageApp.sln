@@ -4,10 +4,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.29409.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuffrageApp", "SuffrageApp.csproj", "{5FBD3382-9C7C-4EF5-A20F-924898C129B0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E2E5838C-304C-4509-B924-E8C298FB1601} = {E2E5838C-304C-4509-B924-E8C298FB1601}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "..\Domain\Core.csproj", "{E2E5838C-304C-4509-B924-E8C298FB1601}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "..\Infrastructure\Infrastructure.csproj", "{D7D96B8A-C237-4F25-9B1D-E86713176883}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "..\Infrastructure\Infrastructure.csproj", "{D7D96B8A-C237-4F25-9B1D-E86713176883}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
