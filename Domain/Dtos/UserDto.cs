@@ -1,11 +1,10 @@
-﻿using Core.SharedKernel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Core.Entities
+namespace Core.Dtos
 {
-    public class User : BaseEntity
+    public class UserDto
     {
         /// <summary>
         /// Имя пользователя
@@ -15,12 +14,11 @@ namespace Core.Entities
         /// <summary>
         /// Опросы, которые созданы пользователем
         /// </summary>
-        public List<Poll> Polls { get; set; }
+        public List<PollDto> Polls { get; set; }
 
         /// <summary>
         /// Все голоса пользователя, которые он выбрал в разных опросах
         /// </summary>
-        public List<Vote> Votes { get; set; }
-
+        public List<VoteDto> Votes { get; set; }
     }
 }

@@ -12,6 +12,10 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Core.Services;
 using Core.Interfaces.Services;
+using Infrastructure.Data;
+using Core.Interfaces.IRepositories;
+using Infrastructure;
+using Core.Mapping;
 
 namespace SuffrageApp
 {
@@ -28,16 +32,15 @@ namespace SuffrageApp
                 .AddRazorRuntimeCompilation()
                 .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0);
 
-            services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(typeof(PollProfile));
 
-            //services.AddEntityFrameworkSqlServer()
-            //        .AddDbContext<DbContext>(o =>
-            //        {
-            //            var connectionString = Configuration.GetConnectionString("Db");
-            //            o.UseSqlServer(connectionString);
-            //        });
+            services.AddDbContext<AppDbContext>(o =>
+                    {
+                        o.UseSqlServer(Configuration.GetConnectionString("SuffrageAppDb"));
+                    });
 
             services
+                .AddTransient<IPollRepository, PollRepository>()
                 .AddTransient<IPollService, PollService>()
                 .AddTransient<IVoteService, VoteService>(); 
 

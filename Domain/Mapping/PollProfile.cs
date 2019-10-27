@@ -11,6 +11,7 @@ namespace Core.Mapping
         public PollProfile()
         {
             CreateMap<PollDto, Poll>(); //TODO: Dto и маппинг
+            CreateMap<Poll, PollDto>();
         }
     }
 }
