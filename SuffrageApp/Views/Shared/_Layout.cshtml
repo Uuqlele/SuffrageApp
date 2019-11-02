@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/scss/custom.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/Animate.css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet">
 </head>
@@ -31,8 +32,8 @@
                     <a asp-controller="Home" asp-action="Privacy" class="list-group-item list-group-item-action text-white" id="Privacy">
                         <i class="material-icons mr-2">accessibility</i>Дополнительный элемент
                     </a>
-                    <a href="#" class="list-group-item list-group-item-action text-white" id="action">
-                        <i class="material-icons mr-2">announcement</i>Элемент действий
+                    <a asp-controller="Poll" asp-action="Index" class="list-group-item list-group-item-action text-white" id="Polls">
+                        <i class="material-icons mr-2">announcement</i>Опросы всякие
                     </a>
                     <a href="#" class="list-group-item list-group-item-action text-white" id="group">
                         <i class="material-icons mr-2">assessment</i>Элемент группы
@@ -55,10 +56,10 @@
                 <div class="navbar-collapse">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link mx-2 text-info" href="#"><h5>Home</h5> <span class="sr-only">(current)</span></a>
+                            <a class="nav-link mx-2 text-primary" href="#"><h5>Home</h5> <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item mx-2 text-info">
-                            <a class="nav-link text-info" href="#"><h5>Link</h5></a>
+                            <a class="nav-link text-primary" href="#"><h5>Link</h5></a>
                         </li>
                         <li class="nav-item mx-2 text-info">
                             <a class="nav-link disabled" href="#"><h5>Disabled</h5></a>
@@ -66,7 +67,7 @@
                     </ul>
                     <form class="form-inline my-2 my-lg-0">
                         <input class="form-control mr-sm-2 bg-secondary border-0 border-radius" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
+                        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
                     </form>
                 </div>
             </nav>

@@ -39,3 +39,4 @@ msbuild.wrn
 /SuffrageApp/SuffrageApp/wwwroot/lib/jquery/LICENSE.txt
 /SuffrageApp/SuffrageApp/wwwroot/lib/jquery-validation/LICENSE.md
 /SuffrageApp/SuffrageApp/wwwroot/lib/jquery-validation-unobtrusive/LICENSE.txt
+/.vs

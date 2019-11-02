@@ -21,5 +21,12 @@ namespace Core.Interfaces.Services
         /// <returns></returns>
         List<User> GetUsersFromPoll(int id);
 
+        /// <summary>
+        /// Получить все опросы
+        /// </summary>
+        /// <returns></returns>
+        public List<PollDto> GetAllPolls();
+
+
     }
 }

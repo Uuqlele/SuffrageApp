@@ -7,26 +7,26 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Data
 {
-    public class EfRepository : IRepository
+    public class EfRepository<T> : IRepository<T> where T : BaseEntity
     {
-        private readonly DbContext _dbContext;
+        private readonly AppDbContext _dbContext;
 
-        public EfRepository(DbContext dbContext)
+        public EfRepository(AppDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        public T GetById<T>(int id) where T : BaseEntity
+        public T GetById(int id) 
         {
             return _dbContext.Set<T>().SingleOrDefault(e => e.Id == id);
         }
 
-        public List<T> List<T>() where T : BaseEntity
+        public List<T> GetAll() 
         {
             return _dbContext.Set<T>().ToList();
         }
 
-        public T Add<T>(T entity) where T : BaseEntity
+        public T Add(T entity) 
         {
             _dbContext.Set<T>().Add(entity);
             _dbContext.SaveChanges();
@@ -34,13 +34,13 @@ namespace Infrastructure.Data
             return entity;
         }
 
-        public void Delete<T>(T entity) where T : BaseEntity
+        public void Delete(T entity) 
         {
             _dbContext.Set<T>().Remove(entity);
             _dbContext.SaveChanges();
         }
 
-        public void Update<T>(T entity) where T : BaseEntity
+        public void Update(T entity)
         {
             _dbContext.Entry(entity).State = EntityState.Modified;
             _dbContext.SaveChanges();
