@@ -9,6 +9,11 @@ namespace Core
     public class PollDto
     {
         /// <summary>
+        /// Идентификатор опроса 
+        /// </summary>
+        public int Id { get; set; }
+
+        /// <summary>
         /// Заголовок
         /// </summary>
         public string Title { get; set; }

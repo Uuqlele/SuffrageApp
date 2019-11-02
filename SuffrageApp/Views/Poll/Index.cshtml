@@ -4,30 +4,25 @@
     ViewData["Title"] = "Polls";
 }
 
-<div class="text-center">
+<div class="text-center mb-3">
     <h1 class="display-4">@ViewData["Title"] </h1>
-    <div class="bg-light">
-
-    </div>
 </div>
 
 <div class="d-flex flex-wrap justify-content-center">
     @foreach (var item in Model)
     {
-        <div class="card card-1 m-1 border-0 animated fadeInUp" style="width: 300px; height: 200px; border-radius: 15px; animation-duration: 0.5s;" @*asp-controller="Advert" asp-action="ShowAdvert" asp-route-id="@item.Id"*@>
-            @*<div class="card-header">
-                Ваше объявление
-            </div>*@
-            <div class="card-body " style=" overflow:hidden; text-overflow:ellipsis; ">
-                <span>
-                    <h5 class="card-title " style="white-space: nowrap; overflow: hidden; text-overflow:ellipsis;">@Html.DisplayFor(modelItem => item.Title)</h5>
-                </span>
-
-                <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.StartDate) ₽</h6>
-            </div>
-            <div class="card-footer" style=" border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;background: rgb(99,53,162);
-background: linear-gradient(90deg, rgba(99,53,162,1) 0%, rgba(129,61,176,1) 100%); opacity: 0.8">
-                <small class="text-white"><p class="card-text">@Html.DisplayFor(modelItem => item.CreationDate)</p></small>
+        <div class="card card-1 m-3 animated fadeInUp border-0" style="width: 20vw; min-width: 250px; min-height:200px; border-radius: 15px; animation-duration: 0.5s;">
+            <div class=" no-gutters h-100">
+                <a asp-controller="Poll" asp-action="PollView" asp-route-id="@item.Id">
+                    <img src="~/img/3.jpg" class="card-img-top" alt="..." style="" height="200">
+                </a>
+         
+                <div class="card-body">
+                    <h3 class="card-title text-nowrap text-truncate" style="overflow: hidden; ">@Html.DisplayFor(modelItem => item.Title)</h3>
+                    <p class="card-text overflow-multiply">@Html.DisplayFor(modelItem => item.Description)</p>
+                    <p class="card-text"><small class="text-muted">Created @Html.DisplayFor(modelItem => item.CreationDate)</small></p>
+                </div>
+                
             </div>
         </div>
     }

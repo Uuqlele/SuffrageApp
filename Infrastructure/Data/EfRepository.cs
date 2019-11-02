@@ -34,16 +34,18 @@ namespace Infrastructure.Data
             return entity;
         }
 
-        public void Delete(T entity) 
+        public bool Delete(T entity) 
         {
             _dbContext.Set<T>().Remove(entity);
-            _dbContext.SaveChanges();
+            
+            return _dbContext.SaveChanges() > 0;
         }
 
-        public void Update(T entity)
+        public bool Update(T entity)
         {
             _dbContext.Entry(entity).State = EntityState.Modified;
-            _dbContext.SaveChanges();
+            
+            return _dbContext.SaveChanges() > 0;
         }
     }
 }

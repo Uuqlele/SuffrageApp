@@ -11,7 +11,7 @@ namespace Core.Interfaces
         T GetById(int id);
         List<T> GetAll();
         T Add(T entity);
-        void Update(T entity);
-        void Delete(T entity);
+        bool Update(T entity);
+        bool Delete(T entity);
     }
 }

@@ -1,5 +1,4 @@
 ﻿/* bootstrap */
-
 .list-group-item {
     position: relative;
     border-bottom-left-radius: 15px !important;
@@ -7,7 +6,7 @@
     margin-top: 4px;
     border: 0px;
     display: flex;
-    transition: 1s all;
+    transition: 0.5s all;
     background-color: rgba(255, 255, 255, 0) !important;
     left: 0px;
 }
@@ -29,20 +28,33 @@
     left:0;
 }
 
-.btn {
+.border-radius {
     border-radius: 15px !important;
 }
 
-/* elements */
-.border-radius {
-    border-radius: 15px;
+.rightRounding {
+    border-bottom-left-radius: 15px !important;
+    border-top-left-radius: 15px !important;
 }
+
+.leftRounding {
+    border-bottom-right-radius: 15px !important;
+    border-top-right-radius: 15px !important;
+}
+
+/* elements */
+.topRounding {
+    border-top-right-radius: 15px !important;
+    border-top-left-radius: 15px !important;
+}
+
 
 .leftBackgroundBlock {
     width: 20%;
     height: 100vh;
     position: sticky;
-    top: 0
+    top: 0;
+    min-width: 120px;
 }
 
 .leftRoundedBlock {
@@ -74,12 +86,25 @@
 }
 
 .card-1 {
-    transition: box-shadow 0.6s;
-    transition: display 0.6s;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.2s;
+    box-shadow: 0 0px 0px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    bottom: 0px;
+    left: 0px;
 }
 
-    .card-1:hover {
-        transition: box-shadow 0.6s;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-    }
+.card-1:hover {
+    transition: all 0.4s;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    bottom: 8px;
+    left: 0px;
+}
+
+.overflow-multiply {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-height: 25px;
+    max-height: 73px;
+}

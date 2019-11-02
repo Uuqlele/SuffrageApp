@@ -1,0 +1,49 @@
+﻿@model Core.PollDto
+
+@{
+    ViewData["Title"] = "PollView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="text-center mb-3 w-100">
+    <h1 class="display-4 text-truncate">@Html.DisplayFor(model => model.Title)</h1>
+</div>
+
+<div>
+    <dl class="row">
+        <dt class = "col-sm-2 ">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class = "col-sm-10 text-truncate">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CreationDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.EndDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EndDate)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "PollEdit", new {  id = Model.Id }) |
+    <a asp-action="Index">Back to List</a>
+</div>
