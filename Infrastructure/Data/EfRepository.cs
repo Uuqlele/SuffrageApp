@@ -26,26 +26,24 @@ namespace Infrastructure.Data
             return _dbContext.Set<T>().ToList();
         }
 
-        public T Add(T entity) 
+        public void Add(T entity) 
         {
             _dbContext.Set<T>().Add(entity);
             _dbContext.SaveChanges();
-
-            return entity;
         }
 
-        public bool Delete(T entity) 
+        public bool Delete(int id) 
         {
+            var entity = GetById(id);
             _dbContext.Set<T>().Remove(entity);
             
-            return _dbContext.SaveChanges() > 0;
+            return _dbContext.SaveChanges() == 0 ? false : true;
         }
 
-        public bool Update(T entity)
+        public void Update(T entity)
         {
             _dbContext.Entry(entity).State = EntityState.Modified;
-            
-            return _dbContext.SaveChanges() > 0;
+             _dbContext.SaveChanges();
         }
     }
 }

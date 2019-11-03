@@ -27,5 +27,9 @@ namespace Core.Interfaces.Services
         List<PollDto> GetAllPolls();
 
         bool UpdatePoll(PollDto dto);
+
+        bool CreatePoll(PollDto dto);
+
+        bool DeletePoll(int id);
     }
 }

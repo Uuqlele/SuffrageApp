@@ -25,14 +25,14 @@ namespace Core.Services
         {
             var poll = _pollRepository.GetAll();
 
-            return _mapper.Map<List<PollDto>>(poll); 
+            return _mapper.Map<List<PollDto>>(poll) ?? new List<PollDto>(); 
         }
 
         public PollDto GetPoll(int id)
         {
             var poll = _pollRepository.GetById(id);
 
-            return _mapper.Map<PollDto>(poll);
+            return _mapper.Map<PollDto>(poll) ?? new PollDto();
         }
 
         public List<User> GetUsersFromPoll(int id)
@@ -40,10 +40,43 @@ namespace Core.Services
             throw new NotImplementedException();
         }
 
+        public bool CreatePoll(PollDto dto)
+        {
+            try
+            {
+                _pollRepository.Add(_mapper.Map<Poll>(dto));
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
+        }
+
         public bool UpdatePoll(PollDto dto)
         {
-            return _pollRepository.Update(_mapper.Map<Poll>(dto));
+            try
+            {
+                _pollRepository.Update(_mapper.Map<Poll>(dto));
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
+        }
 
+        public bool DeletePoll(int id)
+        {
+            try
+            {
+                _pollRepository.Delete(id);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

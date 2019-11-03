@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Core;
 using Core.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
+using SuffrageApp.Models;
 
 namespace SuffrageApp.Controllers
 {
@@ -26,7 +27,7 @@ namespace SuffrageApp.Controllers
         }
 
         [HttpGet]
-        public IActionResult PollView(int id)
+        public IActionResult View(int id)
         {
             var poll = _pollService.GetPoll(id);
 
@@ -34,20 +35,53 @@ namespace SuffrageApp.Controllers
         }
 
         [HttpGet]
-        public IActionResult PollEdit(int id)
+        public IActionResult Create()
         {
-            var poll = _pollService.GetPoll(id);
+            var pollView = new CreatePollViewModel()
+            {
+                PollDto = new PollDto() { },
+                IsEdit = false
+            };
 
-            return View(poll);
+            return View(pollView);
         }
 
+        [HttpPost]
+        public IActionResult Create(PollDto dto)
+        {
+            _pollService.CreatePoll(dto);
+
+            var pollView = _pollService.GetPoll(dto.Id);
+   
+
+            return View("View", pollView);
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var poll = new CreatePollViewModel()
+            {
+                PollDto = _pollService.GetPoll(id),
+                IsEdit = true
+            };
+            return View("Create", poll);
+        }
 
         [HttpPost]
-        public IActionResult PollEdit(PollDto dto)
+        public IActionResult Edit(PollDto dto)
         {
             _pollService.UpdatePoll(dto);
 
-            return RedirectToAction("PollView", new { id = dto.Id });
+            return RedirectToAction("View", new { id = dto.Id });
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            _pollService.DeletePoll(id);
+
+            return RedirectToAction("Index");
         }
     }
 }

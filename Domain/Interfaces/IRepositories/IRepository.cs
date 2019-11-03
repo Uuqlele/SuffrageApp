@@ -10,8 +10,8 @@ namespace Core.Interfaces
     {
         T GetById(int id);
         List<T> GetAll();
-        T Add(T entity);
-        bool Update(T entity);
-        bool Delete(T entity);
+        void Add(T entity);
+        void Update(T entity);
+        bool Delete(int id);
     }
 }

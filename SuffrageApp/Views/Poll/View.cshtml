@@ -44,6 +44,8 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "PollEdit", new {  id = Model.Id }) |
+    @Html.ActionLink("Edit", "Edit", new {  id = Model.Id }) |
     <a asp-action="Index">Back to List</a>
+    <a asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+    <a class="btn btn-danger" asp-controller="Poll" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
 </div>

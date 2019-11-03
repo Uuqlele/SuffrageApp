@@ -1,0 +1,65 @@
+﻿@model CreatePollViewModel
+
+@{
+    string EditOrCreateString = Model.IsEdit == true ? "Edit" : "Create";
+    ViewData["Title"] = EditOrCreateString;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+<div class="text-center mb-3 w-100">
+    <h1 class="display-4 text-truncate">Edit</h1>
+</div>
+
+<div class="" style="width: 60vw">
+
+    <form asp-action="@EditOrCreateString" class="w-100">
+        @if (Model.IsEdit == true)
+        {
+            <input asp-for="PollDto.Id" value="@(Model.PollDto.Id)" class="form-control" type="hidden" />
+        }
+        <div class="form-group">
+            <label asp-for="PollDto.Title" class="control-label">Title</label>
+            <input asp-for="PollDto.Title" class="form-control" placeholder="Тут текст">
+            <span asp-validation-for="PollDto.Title" class="text-danger"></span>
+            <small id="emailHelp" class="form-text text-muted">Some text here.</small>
+        </div>
+        <div class="form-group">
+            <label asp-for="PollDto.Description" class="control-label">Password</label>
+            <textarea asp-for="PollDto.Description" class="form-control" style="min-height:150px" placeholder="Тут тоже текст"> </textarea>
+            <span asp-validation-for="PollDto.Description" class="text-danger"></span>
+
+        </div>
+        <div class="form-group">
+            <label asp-for="PollDto.CreationDate" class="control-label">CreationDate</label>
+            <input asp-for="PollDto.CreationDate" class="form-control" placeholder="Тут тоже текст">
+            <span asp-validation-for="PollDto.CreationDate" class="text-danger"></span>
+
+        </div>
+        <div class="form-group">
+            <label asp-for="PollDto.StartDate" class="control-label">StartDate</label>
+            <input asp-for="PollDto.StartDate" class="form-control" placeholder="Тут тоже текст">
+            <span asp-validation-for="PollDto.StartDate" class="text-danger"></span>
+
+        </div>
+        <div class="form-group">
+            <label asp-for="PollDto.EndDate" class="control-label">EndDate</label>
+            <input asp-for="PollDto.EndDate" class="form-control" placeholder="Тут тоже текст">
+            <span asp-validation-for="PollDto.EndDate" class="text-danger"></span>
+
+        </div>
+        <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a class="pl-3" asp-action="Index">Back to List</a>
+    </form>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
