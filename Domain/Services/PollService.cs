@@ -28,6 +28,11 @@ namespace Core.Services
             return _mapper.Map<List<PollDto>>(poll) ?? new List<PollDto>(); 
         }
 
+        /// <summary>
+        /// Получить опрос по идентификатору
+        /// </summary>
+        /// <param name="id">Идентификатор опроса</param>
+        /// <returns></returns>
         public PollDto GetPoll(int id)
         {
             var poll = _pollRepository.GetById(id);
@@ -40,17 +45,14 @@ namespace Core.Services
             throw new NotImplementedException();
         }
 
-        public bool CreatePoll(PollDto dto)
+        /// <summary>
+        /// Создание опроса 
+        /// </summary>
+        /// <param name="dto">Временная сущность создаваемого опроса</param>
+        /// <returns>Идентификатор созданного опроса</returns>
+        public int CreatePollAndGetId(PollDto dto)
         {
-            try
-            {
-                _pollRepository.Add(_mapper.Map<Poll>(dto));
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-            return true;
+             return _pollRepository.Add(_mapper.Map<Poll>(dto));
         }
 
         public bool UpdatePoll(PollDto dto)

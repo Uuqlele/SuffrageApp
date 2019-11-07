@@ -28,7 +28,12 @@ namespace Core.Interfaces.Services
 
         bool UpdatePoll(PollDto dto);
 
-        bool CreatePoll(PollDto dto);
+        /// <summary>
+        /// Создание опроса и возврат идентификатора созданного опроса
+        /// </summary>
+        /// <param name="dto">Временная сущность создаваемого опроса</param>
+        /// <returns>Идентификатор созданного опроса</returns>
+        int CreatePollAndGetId(PollDto dto);
 
         bool DeletePoll(int id);
     }

@@ -26,10 +26,16 @@ namespace Infrastructure.Data
             return _dbContext.Set<T>().ToList();
         }
 
-        public void Add(T entity) 
+        /// <summary>
+        /// Добавить в базу сущность
+        /// </summary>
+        /// <param name="entity">Сущность одной из таблиц</param>
+        /// <returns>Идентификатор добавленной сущности</returns>
+        public int Add(T entity) 
         {
             _dbContext.Set<T>().Add(entity);
             _dbContext.SaveChanges();
+            return entity.Id;
         }
 
         public bool Delete(int id) 

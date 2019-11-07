@@ -1,7 +1,7 @@
 ﻿@model CreatePollViewModel
 
 @{
-    string EditOrCreateString = Model.IsEdit == true ? "Edit" : "Create";
+    string EditOrCreateString = Model.IsEdit ? "Edit" : "Create";
     ViewData["Title"] = EditOrCreateString;
     Layout = "~/Views/Shared/_Layout.cshtml";
 
@@ -14,38 +14,37 @@
 
 <div class="" style="width: 60vw">
 
-    <form asp-action="@EditOrCreateString" class="w-100">
-        @if (Model.IsEdit == true)
+    <form asp-action="@EditOrCreateString" method="post" class="w-100">
+        @if (Model.IsEdit)
         {
-            <input asp-for="PollDto.Id" value="@(Model.PollDto.Id)" class="form-control" type="hidden" />
+            <input asp-for="@Model.PollDto.Id" value="@(Model.PollDto.Id)" class="form-control" type="hidden" />
         }
         <div class="form-group">
             <label asp-for="PollDto.Title" class="control-label">Title</label>
-            <input asp-for="PollDto.Title" class="form-control" placeholder="Тут текст">
+            <input asp-for="PollDto.Title" class="form-control" placeholder="Enter the desired title">
             <span asp-validation-for="PollDto.Title" class="text-danger"></span>
             <small id="emailHelp" class="form-text text-muted">Some text here.</small>
         </div>
         <div class="form-group">
-            <label asp-for="PollDto.Description" class="control-label">Password</label>
-            <textarea asp-for="PollDto.Description" class="form-control" style="min-height:150px" placeholder="Тут тоже текст"> </textarea>
+            <label asp-for="PollDto.Description" class="control-label">Description</label>
+            <textarea asp-for="PollDto.Description" class="form-control" style="min-height:150px" placeholder="Enter the desired description"> </textarea>
             <span asp-validation-for="PollDto.Description" class="text-danger"></span>
-
         </div>
         <div class="form-group">
             <label asp-for="PollDto.CreationDate" class="control-label">CreationDate</label>
-            <input asp-for="PollDto.CreationDate" class="form-control" placeholder="Тут тоже текст">
+            <input asp-for="PollDto.CreationDate" value="@DateTime.Now" type="datetime"  class="form-control">
             <span asp-validation-for="PollDto.CreationDate" class="text-danger"></span>
 
         </div>
         <div class="form-group">
             <label asp-for="PollDto.StartDate" class="control-label">StartDate</label>
-            <input asp-for="PollDto.StartDate" class="form-control" placeholder="Тут тоже текст">
+            <input asp-for="PollDto.StartDate" value="@DateTime.Now.AddHours(1);"  type="datetime" class="form-control">
             <span asp-validation-for="PollDto.StartDate" class="text-danger"></span>
 
         </div>
         <div class="form-group">
             <label asp-for="PollDto.EndDate" class="control-label">EndDate</label>
-            <input asp-for="PollDto.EndDate" class="form-control" placeholder="Тут тоже текст">
+            <input asp-for="PollDto.EndDate"  type="datetime" value="@DateTime.Now.AddDays(1)" class="form-control">
             <span asp-validation-for="PollDto.EndDate" class="text-danger"></span>
 
         </div>

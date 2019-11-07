@@ -10,7 +10,13 @@ namespace Core.Interfaces
     {
         T GetById(int id);
         List<T> GetAll();
-        void Add(T entity);
+        
+        /// <summary>
+        /// Добавить в базу сущность
+        /// </summary>
+        /// <param name="entity">Сущность одной из таблиц</param>
+        /// <returns>Идентификатор добавленной сущности</returns>
+        int Add(T entity);
         void Update(T entity);
         bool Delete(int id);
     }

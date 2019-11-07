@@ -47,13 +47,12 @@ namespace SuffrageApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(PollDto dto)
+        public IActionResult Create(CreatePollViewModel pollToCreate)
         {
-            _pollService.CreatePoll(dto);
+            int createdPollId = _pollService.CreatePollAndGetId(pollToCreate.PollDto);
 
-            var pollView = _pollService.GetPoll(dto.Id);
+            var pollView = _pollService.GetPoll(createdPollId);
    
-
             return View("View", pollView);
         }
 
