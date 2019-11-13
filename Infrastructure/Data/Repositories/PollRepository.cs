@@ -1,11 +1,10 @@
 ﻿using Core.Entities;
 using Core.Interfaces.IRepositories;
-using Infrastructure.Data;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Infrastructure
+namespace Infrastructure.Data.Repositories
 {
     public class PollRepository : EfRepository<Poll>, IPollRepository
     {

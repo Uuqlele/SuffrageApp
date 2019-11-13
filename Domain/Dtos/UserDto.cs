@@ -19,6 +19,6 @@ namespace Core.Dtos
         /// <summary>
         /// Все голоса пользователя, которые он выбрал в разных опросах
         /// </summary>
-        public List<VoteDto> Votes { get; set; }
+        public List<AnswerDto> Answers { get; set; }
     }
 }

@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Core.Interfaces.IRepositories
 {
-    public interface IPollRepository : IRepository<Poll>
+    public interface IAnswerRepository : IRepository<Answer>
     {
-        int GetPollsCount();
+
     }
 }

@@ -7,8 +7,14 @@ namespace Core.Dtos
     public class AnswerDto
     {
         /// <summary>
-        /// Текст варианта ответа
+        /// Автор голоса
         /// </summary>
-        public string Text { get; set; }
+        public UserDto Author { get; set; }
+
+        /// <summary>
+        /// Автор выбрал вот этот ответ
+        /// </summary>
+        public OptionDto Option { get; set; }
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Core.Dtos;
+using Core.Enums;
 using Core.SharedKernel;
 using System;
 using System.Collections.Generic;
@@ -41,12 +42,12 @@ namespace Core
         /// <summary>
         /// Голоса пользователей в опросе
         /// </summary>
-        public List<VoteDto> Votes { get; set; }
+        public List<AnswerDto> Answers { get; set; }
 
         /// <summary>
         /// Возможные варианты ответов пользователем
         /// </summary>
-        public List<AnswerDto> Answers { get; set; }
+        public List<OptionDto> Options { get; set; }
 
         /// <summary>
         /// Закончился ли опрос
@@ -55,5 +56,7 @@ namespace Core
         {
             return EndDate < DateTime.Now;
         }
+
+        public StateEnum State { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Core;
+using Core.Dtos;
 using Core.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 using SuffrageApp.Models;
@@ -19,11 +20,18 @@ namespace SuffrageApp.Controllers
         }
 
         // GET: /<controller>/
-        public IActionResult Index()
+        public IActionResult Index(int page)
         {
-            var polls = _pollService.GetAllPolls();
+            var polls = _pollService.GetPollsPage();
 
-            return View(polls);
+            var pageViewModel = new PageViewModel(
+                _pollService.GetPollsCount(), 
+                page, 
+                3 /*количество страниц*/);
+
+            PollsViewModel pollsViewModel = new PollsViewModel { Polls = polls };
+
+            return View(pageViewModel);
         }
 
         [HttpGet]
@@ -33,6 +41,8 @@ namespace SuffrageApp.Controllers
 
             return View(poll);
         }
+
+
 
         [HttpGet]
         public IActionResult Create()

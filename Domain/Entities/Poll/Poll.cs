@@ -38,12 +38,12 @@ namespace Core.Entities
         /// <summary>
         /// Голоса пользователей в опросе
         /// </summary>
-        public List<Vote> Votes { get; set; }
+        public List<Answer> Answers { get; set; }
 
         /// <summary>
         /// Возможные варианты ответов пользователем
         /// </summary>
-        public List<Answer> Answers { get; set; }
+        public List<Option> Options { get; set; }
 
         /// <summary>
         /// Закончился ли опрос

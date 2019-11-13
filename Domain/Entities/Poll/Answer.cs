@@ -5,11 +5,19 @@ using System.Text;
 
 namespace Core.Entities
 {
+    /// <summary>
+    /// Выбранный пользователем вариант для какого-то опроса
+    /// </summary>
     public class Answer : BaseEntity
     {
         /// <summary>
-        /// Текст варианта ответа
+        /// Автор голоса
         /// </summary>
-        public string Text { get; set; }
+        public User Author { get; set; }
+
+        /// <summary>
+        /// Голос принадлежит данному вопросу
+        /// </summary>
+        public Option Option { get; set; }
     }
 }

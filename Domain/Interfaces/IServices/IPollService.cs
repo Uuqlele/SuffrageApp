@@ -24,7 +24,7 @@ namespace Core.Interfaces.Services
         /// Получить все опросы
         /// </summary>
         /// <returns></returns>
-        List<PollDto> GetAllPolls();
+        List<PollDto> GetPollsPage();
 
         bool UpdatePoll(PollDto dto);
 
@@ -35,6 +35,17 @@ namespace Core.Interfaces.Services
         /// <returns>Идентификатор созданного опроса</returns>
         int CreatePollAndGetId(PollDto dto);
 
+        /// <summary>
+        /// Удалить опрос по идентификатору
+        /// </summary>
+        /// <param name="id">Идентификатор опроса</param>
+        /// <returns></returns>
         bool DeletePoll(int id);
+
+        /// <summary>
+        /// Получить количество опросов в базе
+        /// </summary>
+        /// <returns></returns>
+        int GetPollsCount();
     }
 }

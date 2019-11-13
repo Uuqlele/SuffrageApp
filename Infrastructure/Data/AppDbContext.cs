@@ -13,6 +13,7 @@ namespace Infrastructure.Data
         }
 
         public DbSet<Poll> Polls { get; set; }
+        public DbSet<Option> Options { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

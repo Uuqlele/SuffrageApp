@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Core.Entities;
+using Core.Enums;
 using Core.Interfaces.IRepositories;
 using Core.Interfaces.Services;
 using System;
@@ -14,18 +15,23 @@ namespace Core.Services
     {
         private readonly IMapper _mapper;
         private readonly IPollRepository _pollRepository;
+        private readonly IOptionRepository _optionRepository;
 
-        public PollService(IMapper mapper, IPollRepository pollRepository)
+        public PollService(IMapper mapper, IPollRepository pollRepository, IOptionRepository optionRepository)
         {
             _mapper = mapper;
             _pollRepository = pollRepository;
+            _optionRepository = optionRepository;
         }
 
-        public List<PollDto> GetAllPolls()
+        public List<PollDto> GetPollsPage()
         {
-            var poll = _pollRepository.GetAll();
 
-            return _mapper.Map<List<PollDto>>(poll) ?? new List<PollDto>(); 
+            var polls = _mapper.Map<List<PollDto>>(_pollRepository.GetAll());
+
+            polls.ForEach(poll => poll.State = GetPollState(poll));
+
+            return polls ?? new List<PollDto>(); 
         }
 
         /// <summary>
@@ -79,6 +85,23 @@ namespace Core.Services
                 return false;
             }
             return true;
+        }
+
+        private StateEnum GetPollState(PollDto poll)
+        {
+            //Если дата начала в прошлом - опрос начался, иначе дата начала в будущем и опрос ещё не начался
+            StateEnum result = poll.StartDate <= DateTime.Now ? StateEnum.Active : StateEnum.NotStarted;
+
+            if (poll.EndDate <= DateTime.Now) //Если дата конца в прошлом - опрос закончился
+            {
+                result = StateEnum.Ended;
+            }
+            return result;
+        }
+
+        public int GetPollsCount()
+        {
+            return _pollRepository.GetPollsCount();
         }
     }
 }
