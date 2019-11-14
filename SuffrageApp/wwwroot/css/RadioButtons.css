@@ -27,16 +27,15 @@
     -ms-appearance: none;
     -webkit-appearance: none;
     appearance: none;
-    border-radius: 100%;
-    border: 16px solid #eceff1;
+    border-radius: 50%;
+    border: 16px solid #ccc;
     cursor: pointer;
-    height: 30px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    height: 60px;
+    margin: 10px;
     outline: 0;
     -webkit-tap-highlight-color: transparent;
     transition: border-color 800ms;
-    width: 30px;
+    width: 60px;
 }
 
     .radio.active {
@@ -46,67 +45,48 @@
 .ball {
     background: #6c4c95;
     border-radius: 50%;
-    height: 17px;
-    left: 7px;
+    height: 34px;
+    left: 23px;
     pointer-events: none;
     position: absolute;
-    top: 22px;
+    top: 23px;
     transform: translateY(-80px);
     transition: transform 800ms;
-    width: 17px;
+    width: 34px;
 }
 
-.ball.pos0 {
-    transform: translateY(0px);
-}
-.ball.pos1 {
-    transform: translateY(50px);
-}
-.ball.pos2 {
-    transform: translateY(100px);
-}
-.ball.pos3 {
-    transform: translateY(150px);
-}
-.ball.pos4 {
-    transform: translateY(200px);
-}
-.ball.pos5 {
-    transform: translateY(250px);
-}
-.ball.pos6 {
-    transform: translateY(300px);
-}
-.ball.pos7 {
-    transform: translateY(350px);
-}
-.ball.pos8 {
-    transform: translateY(400px);
-}
-.ball.pos9 {
-    transform: translateY(450px);
-}
-.ball.pos10 {
-    transform: translateY(500px);
-}
+    .ball.pos0 {
+        transform: translateY(0px);
+    }
+
+    .ball.pos1 {
+        transform: translateY(80px);
+    }
+
+    .ball.pos2 {
+        transform: translateY(160px);
+    }
+
+    .ball.pos3 {
+        transform: translateY(240px);
+    }
 
 .labels {
     margin-left: 5px;
 }
 
 .label {
-    color: #212529;
+    color: #ccc;
     cursor: pointer;
     display: flex;
     flex-direction: column;
-    font-size: 1rem;
-    line-height: 17px;
+    font-size: 28px;
+    line-height: 50px;
     padding: 15px 0;
     -webkit-tap-highlight-color: transparent;
     transition: color 800ms;
 }
 
-.label.active {
-    color: #6c4c95;
-}
-
+    .label.active {
+        color: #6c4c95;
+    }

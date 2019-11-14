@@ -63,10 +63,8 @@ namespace SuffrageApp.Controllers
         public IActionResult Create(CreatePollViewModel pollToCreate)
         {
             int createdPollId = _pollService.CreatePollAndGetId(pollToCreate.PollDto);
-
-            var pollView = _pollService.GetPoll(createdPollId);
    
-            return View("View", pollView);
+            return RedirectToAction("View", new { id = createdPollId });
         }
 
         [HttpGet]

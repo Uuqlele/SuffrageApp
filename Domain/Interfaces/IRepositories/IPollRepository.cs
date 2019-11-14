@@ -9,6 +9,6 @@ namespace Core.Interfaces.IRepositories
     {
         int GetPollsCount();
         public List<Poll> GetPollsPage(int pollOnPage, int page);
-
+        Poll GetPollWithOptions(int id);
     }
 }

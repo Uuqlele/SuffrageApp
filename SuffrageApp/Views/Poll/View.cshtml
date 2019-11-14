@@ -3,52 +3,54 @@
 @{
     ViewData["Title"] = "PollView";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    int countOptions = 0;
+    int countLabels = 0;
 }
+<link rel="stylesheet" href="~/css/RadioButtons.css"/>
 
 <div class="text-center mb-3 w-100">
     <h1 class="display-4 text-truncate">@Html.DisplayFor(model => model.Title)</h1>
 </div>
 
-<div>
-    <dl class="row">
-        <dt class = "col-sm-2 ">
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd class = "col-sm-10 text-truncate">
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreationDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreationDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.StartDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.StartDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EndDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EndDate)
-        </dd>
-    </dl>
-</div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new {  id = Model.Id }) |
+<form class="d-flex justify-content-center border">
+
+        <h3 class="text-muted">@Html.DisplayFor(model => model.Description)</h3>
+
+        <div class="radios-boxes">
+            <div class="radios">
+                @foreach (var option in Model.Options)
+                {
+                    countOptions++;
+                    <input type="radio" name="radio" id="@String.Format("radio" + countOptions)" class="radio" value="@option">
+                }
+                <div class="ball"></div>
+            </div>
+            <div class="labels">
+                @foreach (var option in Model.Options)
+                {
+                    countLabels++;
+                    <label for="@String.Format("radio" + countLabels)" class="label">@option.Text</label>
+                }
+            </div>
+        </div>
+
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     <a asp-action="Index">Back to List</a>
     <a asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
     <a class="btn btn-danger" asp-controller="Poll" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
-</div>
+</form>
+
+
+
+<svg class="filter" version="1.1">
+    <defs>
+        <filter id="gooeyness">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur" />
+            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -10" result="gooey" />
+            <feComposite in="SourceGraphic" in2="gooey" operator="atop" />
+        </filter>
+    </defs>
+</svg>
 
 
 <script>
@@ -57,14 +59,14 @@
     let ball = document.querySelector('.ball');
     let prevRadio, prevLabel;
     radios.forEach((radio, index) => {
-                radio.addEventListener('click', function (e) {
-                    if (prevRadio) prevRadio.classList.toggle('active');
-                    if (prevLabel) prevLabel.classList.toggle('active');
-                    radio.classList.toggle('active');
-                    prevRadio = radio;
-                    labels[index].classList.toggle('active');
-                    prevLabel = labels[index];
-                    ball.className = `ball pos${index}`;
-                });
-            });
+        radio.addEventListener('click', function (e) {
+            if (prevRadio) prevRadio.classList.toggle('active');
+            if (prevLabel) prevLabel.classList.toggle('active');
+            radio.classList.toggle('active');
+            prevRadio = radio;
+            labels[index].classList.toggle('active');
+            prevLabel = labels[index];
+            ball.className = `ball pos${index}`;
+        });
+    });
 </script>

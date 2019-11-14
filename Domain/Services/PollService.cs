@@ -41,9 +41,10 @@ namespace Core.Services
         /// <returns></returns>
         public PollDto GetPoll(int id)
         {
-            var poll = _pollRepository.GetById(id);
+            PollDto pollDto = _mapper.Map<PollDto>(_pollRepository.GetPollWithOptions(id));
+            pollDto.State = GetPollState(pollDto);
 
-            return _mapper.Map<PollDto>(poll) ?? new PollDto();
+            return pollDto ?? new PollDto();
         }
 
         public List<User> GetUsersFromPoll(int id)
@@ -65,6 +66,7 @@ namespace Core.Services
         {
             try
             {
+                dto.State = GetPollState(dto);
                 _pollRepository.Update(_mapper.Map<Poll>(dto));
             }
             catch (Exception)

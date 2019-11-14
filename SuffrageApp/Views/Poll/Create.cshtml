@@ -50,21 +50,17 @@
 
         <div class="col-8 border border-radius m-2 p-4">
             <label class="control-label">Options</label>
-            <div class="d-flex flex-column">
+            <div class="d-flex flex-column" id="options">
                 <div class="d-inline-flex align-content-center m-2">
-                    <i class="material-icons mr-1">delete</i>
-                    <label>topchikLabel</label>
+                    <div><i class="material-icons mr-1">delete</i></div>
+                    <input name="PollDto.Options[0].Text" value="Yes" class="form-control roundedInput col-form-label-sm">
                 </div>
                 <div class="d-inline-flex align-content-center m-2">
-                    <i class="material-icons mr-1">delete</i>
-                    <label>topchikLabel</label>
+                    <i class="material-icons mr-1">delete</i> 
+                    <input name="PollDto.Options[1].Text" value="NO"  class="form-control roundedInput col-form-label-sm">
                 </div>
-                <div class="d-inline-flex align-content-center m-2">
-                    <i class="material-icons mr-1">delete</i>
-                    <label>topchikLabel</label>
-                </div>
-
             </div>
+            <hr />
             <div class="input-group mt-2">
                 <button type="button" class="btn btn-info btn-sm input-group-prepend rightRoundingNone" id="btnAddField"><i class="material-icons">add</i></button>
                 <input class="form-control bg-secondary border-0 roundedInput leftRoundingNone" placeholder="Text label" aria-label="Search" id="textAddField">
@@ -86,16 +82,6 @@
 
 </div>
 
-<svg class="filter" version="1.1">
-    <defs>
-        <filter id="gooeyness">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur" />
-            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -10" result="gooey" />
-            <feComposite in="SourceGraphic" in2="gooey" operator="atop" />
-        </filter>
-    </defs>
-</svg>
-
 @section Scripts {
 
     <script>
@@ -115,22 +101,17 @@
             }
             return true;       
         }
-        const radioGroup = document.querySelector('#radios');
-        const labelGroup = document.querySelector('#labels');
+        const optionsGroup = document.querySelector('#options');
         const addFieldButton = document.querySelector('#btnAddField');
 
         addFieldButton.addEventListener("click", e => {
             if (validateInput(document.getElementById("textAddField")))
             {
-                e.preventDefault();
-                const input = document.createElement("input");
-                input.classList.add('radioEdit');
-                radioGroup.append(input);
-
-                const label = document.createElement("label");
-                label.classList.add('label');
-                label.innerHTML = document.getElementById("textAddField").value;
-                labelGroup.append(label);
+                const option = document.createElement("label");
+                option.classList.add('option');
+                option.setAttribute('Name', 'options');
+                option.innerHTML = document.getElementById("textAddField").value;
+                optionsGroup.append(option);
             }
         });
 

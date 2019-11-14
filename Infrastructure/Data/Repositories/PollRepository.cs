@@ -22,9 +22,16 @@ namespace Infrastructure.Data.Repositories
             return _dbContext.Polls.Count();
         }
 
-        public  List<Poll> GetPollsPage(int pollOnPage, int page)
+        public List<Poll> GetPollsPage(int pollOnPage, int page)
         {
             return _dbContext.Polls.Skip((page - 1) * pollOnPage).Take(pollOnPage).ToList();
+        }
+
+        public Poll GetPollWithOptions(int id)
+        {
+            return _dbContext.Polls
+                .Include(poll => poll.Options)
+                .SingleOrDefault(poll => poll.Id == id);
         }
     }
 }
