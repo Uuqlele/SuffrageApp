@@ -24,10 +24,10 @@ namespace Core.Services
             _optionRepository = optionRepository;
         }
 
-        public List<PollDto> GetPollsPage()
+        public List<PollDto> GetPollsPage(int pollsOnPage, int page)
         {
 
-            var polls = _mapper.Map<List<PollDto>>(_pollRepository.GetAll());
+            var polls = _mapper.Map<List<PollDto>>(_pollRepository.GetPollsPage(pollsOnPage, page));
 
             polls.ForEach(poll => poll.State = GetPollState(poll));
 
@@ -101,7 +101,8 @@ namespace Core.Services
 
         public int GetPollsCount()
         {
-            return _pollRepository.GetPollsCount();
+            int result = _pollRepository.GetPollsCount();
+            return result;
         }
     }
 }

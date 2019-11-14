@@ -6,59 +6,134 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
+<link rel="stylesheet" href="~/css/RadioButtons.css" />
 
-
-<div class="text-center mb-3 w-100">
-    <h1 class="display-4 text-truncate">Edit</h1>
+<div class="text-center mb-5 w-100">
+    <h1 class="display-4 text-truncate">@ViewData["Title"]</h1>
 </div>
 
-<div class="" style="width: 60vw">
+<div class="d-flex justify-content-center">
 
-    <form asp-action="@EditOrCreateString" method="post" class="w-100">
+    <form asp-action="@EditOrCreateString" method="post" class="row" style="width: 60vw">
+        <div class="col-8 border border-radius p-4 m-2 ">
+            <label class="control-label">Main info</label>
+            <div class="form-group">
+                <input asp-for="PollDto.Title" class="form-control form-control-lg roundedInput" placeholder="Title">
+                <span asp-validation-for="PollDto.Title" class="text-danger"></span>
+                <small id="emailHelp" class="form-text text-muted">Some text here.</small>
+            </div>
+            <div class="form-group">
+                <textarea asp-for="PollDto.Description" class="form-control roundedInput" style="min-height:125px" placeholder="Description"> </textarea>
+                <span asp-validation-for="PollDto.Description" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-3 border border-radius p-4 m-2 ">
+            <div class="form-group">
+                <label asp-for="PollDto.CreationDate" class="control-label">CreationDate</label>
+                <input asp-for="PollDto.CreationDate" value="@DateTime.Now" type="datetime" class="form-control roundedInput">
+                <span asp-validation-for="PollDto.CreationDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PollDto.StartDate" class="control-label">StartDate</label>
+                <input asp-for="PollDto.StartDate" value="@DateTime.Now.AddHours(1);" type="datetime" class="form-control roundedInput">
+                <span asp-validation-for="PollDto.StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PollDto.EndDate" class="control-label">EndDate</label>
+                <input asp-for="PollDto.EndDate" type="datetime" value="@DateTime.Now.AddDays(1)" class="form-control roundedInput">
+                <span asp-validation-for="PollDto.EndDate" class="text-danger"></span>
+            </div>
+        </div>
+
+
+
+        <div class="col-8 border border-radius m-2 p-4">
+            <label class="control-label">Options</label>
+            <div class="d-flex flex-column">
+                <div class="d-inline-flex align-content-center m-2">
+                    <i class="material-icons mr-1">delete</i>
+                    <label>topchikLabel</label>
+                </div>
+                <div class="d-inline-flex align-content-center m-2">
+                    <i class="material-icons mr-1">delete</i>
+                    <label>topchikLabel</label>
+                </div>
+                <div class="d-inline-flex align-content-center m-2">
+                    <i class="material-icons mr-1">delete</i>
+                    <label>topchikLabel</label>
+                </div>
+
+            </div>
+            <div class="input-group mt-2">
+                <button type="button" class="btn btn-info btn-sm input-group-prepend rightRoundingNone" id="btnAddField"><i class="material-icons">add</i></button>
+                <input class="form-control bg-secondary border-0 roundedInput leftRoundingNone" placeholder="Text label" aria-label="Search" id="textAddField">
+            </div>
+        </div>
+
+
+
+
+        <div class="d-flex justify-content-center col-12">
+            <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+        </div>
+
         @if (Model.IsEdit)
         {
             <input asp-for="@Model.PollDto.Id" value="@(Model.PollDto.Id)" class="form-control" type="hidden" />
         }
-        <div class="form-group">
-            <label asp-for="PollDto.Title" class="control-label">Title</label>
-            <input asp-for="PollDto.Title" class="form-control" placeholder="Enter the desired title">
-            <span asp-validation-for="PollDto.Title" class="text-danger"></span>
-            <small id="emailHelp" class="form-text text-muted">Some text here.</small>
-        </div>
-        <div class="form-group">
-            <label asp-for="PollDto.Description" class="control-label">Description</label>
-            <textarea asp-for="PollDto.Description" class="form-control" style="min-height:150px" placeholder="Enter the desired description"> </textarea>
-            <span asp-validation-for="PollDto.Description" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="PollDto.CreationDate" class="control-label">CreationDate</label>
-            <input asp-for="PollDto.CreationDate" value="@DateTime.Now" type="datetime"  class="form-control">
-            <span asp-validation-for="PollDto.CreationDate" class="text-danger"></span>
-
-        </div>
-        <div class="form-group">
-            <label asp-for="PollDto.StartDate" class="control-label">StartDate</label>
-            <input asp-for="PollDto.StartDate" value="@DateTime.Now.AddHours(1);"  type="datetime" class="form-control">
-            <span asp-validation-for="PollDto.StartDate" class="text-danger"></span>
-
-        </div>
-        <div class="form-group">
-            <label asp-for="PollDto.EndDate" class="control-label">EndDate</label>
-            <input asp-for="PollDto.EndDate"  type="datetime" value="@DateTime.Now.AddDays(1)" class="form-control">
-            <span asp-validation-for="PollDto.EndDate" class="text-danger"></span>
-
-        </div>
-        <div class="form-group form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1">Check me out</label>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-        <a class="pl-3" asp-action="Index">Back to List</a>
     </form>
+
 </div>
 
-
+<svg class="filter" version="1.1">
+    <defs>
+        <filter id="gooeyness">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur" />
+            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -10" result="gooey" />
+            <feComposite in="SourceGraphic" in2="gooey" operator="atop" />
+        </filter>
+    </defs>
+</svg>
 
 @section Scripts {
+
+    <script>
+        function validateInput(input)
+        {
+            if (input.value.trim() === "") {
+                alert("Please enter a option name");
+                input.focus();
+                return false;
+            }
+            if (input.value !== "") {
+                if (input.value.length > 40) {
+                    alert("Please enter a option name no more than 40 characters");
+                    input.focus();
+                    return false;
+                }
+            }
+            return true;       
+        }
+        const radioGroup = document.querySelector('#radios');
+        const labelGroup = document.querySelector('#labels');
+        const addFieldButton = document.querySelector('#btnAddField');
+
+        addFieldButton.addEventListener("click", e => {
+            if (validateInput(document.getElementById("textAddField")))
+            {
+                e.preventDefault();
+                const input = document.createElement("input");
+                input.classList.add('radioEdit');
+                radioGroup.append(input);
+
+                const label = document.createElement("label");
+                label.classList.add('label');
+                label.innerHTML = document.getElementById("textAddField").value;
+                labelGroup.append(label);
+            }
+        });
+
+    </script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

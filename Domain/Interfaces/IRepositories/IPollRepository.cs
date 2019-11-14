@@ -8,5 +8,7 @@ namespace Core.Interfaces.IRepositories
     public interface IPollRepository : IRepository<Poll>
     {
         int GetPollsCount();
+        public List<Poll> GetPollsPage(int pollOnPage, int page);
+
     }
 }

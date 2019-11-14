@@ -14,13 +14,13 @@
 </head>
 <body class="d-flex">
     <div class="p-3 leftBackgroundBlock">
-        <div class="d-flex flex-column align-items-center leftRoundedBlock" style="box-shadow: inset 0px 0px 30px rgba(0,0,0,0.5);">
+        <div class="d-flex flex-column align-items-center leftRoundedBlock border-radius" style="box-shadow: inset 0px 0px 30px rgba(0,0,0,0.5);">
             <div class="d-flex flex-column text-center">
                 @*<a class="text-nowrap" asp-controller="Home" asp-action="Index">
                         <img src="~/logo.svg" width="100" height="100" alt="SolarBoard" class="mt-4 ml-4">
                     </a>*@
-                <i class="material-icons text-white pt-4" style="font-size: 8vw">check_circle</i>
-                <h1 class="text-white pt-2 d-none d-lg-inline" >Suffrage App</h1>
+                <a asp-controller="Home" asp-action="Index"><i class="material-icons text-white pt-4" style="font-size: 8vw; text-shadow: 2px 2px 6px rgba(0,0,0,0.50);">check_circle</i></a>
+                <h1 class="text-white pt-2 d-none d-lg-inline "  style="text-shadow: 2px 2px 6px rgba(0,0,0,0.50);">Suffrage App</h1>
 
             </div>
 
@@ -66,10 +66,12 @@
                         </li>
                     </ul>
                     <form class="form-inline my-2 my-lg-0">
-                        <button class="btn btn-info mr-3 leftRounding rightRounding" asp-controller="Poll" asp-action="Create">Create Poll</button>
+                        <button class="btn btn-info mr-3 d-flex justify-content-center" asp-controller="Poll" asp-action="Create">
+                            <i class="material-icons mr-1">add</i><span>Create Poll</span>
+                        </button>
                         <div class="input-group">
-                            <input class="form-control bg-secondary border-0 rightRounding" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-primary input-group-append leftRounding" style="border-bottom-left-radius:0px; border-top-left-radius: 0px" type="submit">Submit</button>
+                            <input class="form-control bg-secondary border-0 roundedInput rightRoundingNone" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-primary input-group-append leftRoundingNone" type="submit">Submit</button>
                         </div>
                     </form>
                 </div>

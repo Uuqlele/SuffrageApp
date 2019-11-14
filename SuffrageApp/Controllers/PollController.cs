@@ -20,18 +20,21 @@ namespace SuffrageApp.Controllers
         }
 
         // GET: /<controller>/
-        public IActionResult Index(int page)
+        public IActionResult Index(int page = 1)
         {
-            var polls = _pollService.GetPollsPage();
+            int pollsOnPage = 6;
 
-            var pageViewModel = new PageViewModel(
-                _pollService.GetPollsCount(), 
-                page, 
-                3 /*количество страниц*/);
+            var pollsViewModel = new PollsViewModel { 
+                Polls = _pollService.GetPollsPage(pollsOnPage, page),
+                PageViewModel = new PageViewModel
+                (
+                    _pollService.GetPollsCount(),
+                    page,
+                    3 /*опросов на страницу*/
+                )
+            };
 
-            PollsViewModel pollsViewModel = new PollsViewModel { Polls = polls };
-
-            return View(pageViewModel);
+            return View(pollsViewModel);
         }
 
         [HttpGet]

@@ -1,28 +1,51 @@
-﻿@model PageViewModel
+﻿@model PollsViewModel
 
 @{
     ViewData["Title"] = "Polls";
 }
 
-<div class="text-center mb-3">
-    <h1 class="display-4">@ViewData["Title"] </h1>
+
+
+
+<div class="d-flex justify-content-center align-items-stretch">
+    @if (Model.PageViewModel.HasPreviousPage)
+    {
+        <a asp-action="Index"
+           asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+           class="  d-flex align-items-center">
+            <i class="material-icons">keyboard_arrow_left</i>
+        </a>
+    }
+    <div class="text-center m-3">
+        <h1 class="display-4">@ViewData["Title"] </h1>
+    </div>
+    @if (Model.PageViewModel.HasNextPage)
+    {
+        <a asp-action="Index"
+           asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+           class=" d-flex align-items-center">
+            <i class="material-icons">keyboard_arrow_right</i>
+        </a>
+    }
 </div>
 
+
 <div class="d-flex flex-wrap justify-content-center">
-    @foreach (var item in Model.)
+
+    @foreach (var item in Model.Polls)
     {
         <div class="card card-1 m-3 animated fadeInUp border-0" style="width: 20vw; min-width: 250px; min-height:200px; border-radius: 15px; animation-duration: 0.5s;">
             <div class=" no-gutters h-100">
                 <a asp-controller="Poll" asp-action="View" asp-route-id="@item.Id">
                     <img src="~/img/3.jpg" class="card-img-top" alt="..." style="" height="200">
                 </a>
-         
+
                 <div class="card-body">
                     <h3 class="card-title text-nowrap text-truncate" style="overflow: hidden; ">@Html.DisplayFor(modelItem => item.Title)</h3>
                     <p class="card-text overflow-multiply">@Html.DisplayFor(modelItem => item.Description)</p>
                     <p class="card-text"><small class="text-muted">Created @Html.DisplayFor(modelItem => item.CreationDate)</small></p>
                 </div>
-                
+
             </div>
         </div>
     }

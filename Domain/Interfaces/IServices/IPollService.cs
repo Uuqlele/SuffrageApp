@@ -24,7 +24,7 @@ namespace Core.Interfaces.Services
         /// Получить все опросы
         /// </summary>
         /// <returns></returns>
-        List<PollDto> GetPollsPage();
+        List<PollDto> GetPollsPage(int pollsOnPage, int page);
 
         bool UpdatePoll(PollDto dto);
 
