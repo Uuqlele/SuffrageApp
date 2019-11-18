@@ -6,6 +6,12 @@ namespace Core.Dtos
 {
     public class OptionDto
     {
+
+        /// <summary>
+        /// Идентификатор варианта ответа 
+        /// </summary>
+        public int Id { get; set; }
+
         /// <summary>
         /// Текст варианта ответа
         /// </summary>

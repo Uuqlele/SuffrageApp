@@ -20,6 +20,12 @@ namespace Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Poll>()
+              .HasMany(poll => poll.Options)
+              .WithOne(option => option.Poll)
+              .OnDelete(DeleteBehavior.Cascade);
+              
+
             base.OnModelCreating(modelBuilder);
         }
 

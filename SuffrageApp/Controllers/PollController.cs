@@ -22,7 +22,7 @@ namespace SuffrageApp.Controllers
         // GET: /<controller>/
         public IActionResult Index(int page = 1)
         {
-            int pollsOnPage = 6;
+            int pollsOnPage = 9;
 
             var pollsViewModel = new PollsViewModel { 
                 Polls = _pollService.GetPollsPage(pollsOnPage, page),
@@ -30,7 +30,7 @@ namespace SuffrageApp.Controllers
                 (
                     _pollService.GetPollsCount(),
                     page,
-                    3 /*опросов на страницу*/
+                    pollsOnPage 
                 )
             };
 
@@ -79,11 +79,13 @@ namespace SuffrageApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(PollDto dto)
+        public IActionResult Edit(CreatePollViewModel pollToUpdate)
         {
-            _pollService.UpdatePoll(dto);
+            pollToUpdate.PollDto.Options.ForEach(opt => opt.Poll = pollToUpdate.PollDto);
 
-            return RedirectToAction("View", new { id = dto.Id });
+            _pollService.UpdatePoll(pollToUpdate.PollDto);
+
+            return RedirectToAction("View", new { id = pollToUpdate.PollDto.Id });
         }
 
         [HttpGet]

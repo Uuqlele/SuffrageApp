@@ -64,15 +64,10 @@ namespace Core.Services
 
         public bool UpdatePoll(PollDto dto)
         {
-            try
-            {
+            
                 dto.State = GetPollState(dto);
-                _pollRepository.Update(_mapper.Map<Poll>(dto));
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+                _pollRepository.UpdatePollWithOptions(_mapper.Map<Poll>(dto));
+
             return true;
         }
 

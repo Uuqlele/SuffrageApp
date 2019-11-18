@@ -4,6 +4,7 @@
     string EditOrCreateString = Model.IsEdit ? "Edit" : "Create";
     ViewData["Title"] = EditOrCreateString;
     Layout = "~/Views/Shared/_Layout.cshtml";
+    int optionCount = 0;
 
 }
 <link rel="stylesheet" href="~/css/RadioButtons.css" />
@@ -15,7 +16,7 @@
 <div class="d-flex justify-content-center">
 
     <form asp-action="@EditOrCreateString" method="post" class="row" style="width: 60vw">
-        <div class="col-8 border border-radius p-4 m-2 ">
+        <div class="col-8 shadow border-radius p-4 m-2 ">
             <label class="control-label">Main info</label>
             <div class="form-group">
                 <input asp-for="PollDto.Title" class="form-control form-control-lg roundedInput" placeholder="Title">
@@ -23,15 +24,20 @@
                 <small id="emailHelp" class="form-text text-muted">Some text here.</small>
             </div>
             <div class="form-group">
-                <textarea asp-for="PollDto.Description" class="form-control roundedInput" style="min-height:125px" placeholder="Description"> </textarea>
+                <textarea asp-for="PollDto.Description" class="form-control roundedInput" style="resize:none; min-height: 125px" placeholder="Description"> </textarea>
                 <span asp-validation-for="PollDto.Description" class="text-danger"></span>
             </div>
         </div>
 
-        <div class="col-3 border border-radius p-4 m-2 ">
+        <div class="col-3 shadow border-radius p-4 m-2 ">
             <div class="form-group">
                 <label asp-for="PollDto.CreationDate" class="control-label">CreationDate</label>
-                <input asp-for="PollDto.CreationDate" value="@DateTime.Now" type="datetime" class="form-control roundedInput">
+                <div class="input-group">
+                    <input asp-for="PollDto.CreationDate" value="@DateTime.Now" type="datetime" class="form-control roundedInput rightRoundingNone" readonly>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary btn-sm leftRoundingNone d-flex" type="button"><i class="material-icons">refresh</i></button>
+                    </div>
+                </div>
                 <span asp-validation-for="PollDto.CreationDate" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -48,31 +54,40 @@
 
 
 
-        <div class="col-8 border border-radius m-2 p-4">
+        <div class="col-8 shadow border-radius m-2 p-4">
             <label class="control-label">Options</label>
             <div class="d-flex flex-column" id="options">
-                <div class="d-inline-flex align-content-center m-2">
-                    <div><i class="material-icons mr-1">delete</i></div>
-                    <input name="PollDto.Options[0].Text" value="Yes" class="form-control roundedInput col-form-label-sm">
-                </div>
-                <div class="d-inline-flex align-content-center m-2">
-                    <i class="material-icons mr-1">delete</i> 
-                    <input name="PollDto.Options[1].Text" value="NO"  class="form-control roundedInput col-form-label-sm">
-                </div>
+                @if (!Model.IsEdit)
+                {
+                    <div class="d-inline-flex align-content-center m-2">
+                        <input name="PollDto.Options[0].Text" value="First" class="form-control roundedInput col-form-label-sm">
+                        <div><i class="material-icons mr-1">delete</i></div>
+                    </div>
+                }
+                else
+                {
+                    foreach (var option in Model.PollDto.Options)
+                    {
+                        <div class="d-inline-flex align-content-center m-2">
+                            <input name="PollDto.Options[@optionCount].Text" value="@option.Text" class="form-control roundedInput col-form-label-sm">
+                            <div><i class="material-icons mr-1">delete</i></div>
+                            <input type="hidden" name="PollDto.Options[@optionCount].Id" value="@Model.PollDto.Options[optionCount].Id" />
+                        </div>
+                        optionCount++;
+                    }
+                }
             </div>
             <hr />
-            <div class="input-group mt-2">
+
+            <button type="button" class="btn btn-info btn-sm " id="btnAddField"><i class="material-icons">add</i></button>
+
+            @*<div class="input-group mt-2">
                 <button type="button" class="btn btn-info btn-sm input-group-prepend rightRoundingNone" id="btnAddField"><i class="material-icons">add</i></button>
                 <input class="form-control bg-secondary border-0 roundedInput leftRoundingNone" placeholder="Text label" aria-label="Search" id="textAddField">
-            </div>
+            </div>*@
         </div>
-
-
-
-
-        <div class="d-flex justify-content-center col-12">
-            <button type="submit" class="btn btn-primary btn-lg">Submit</button>
-        </div>
+        <button type="submit" class="btn btn-outline-info btn-lg w-100 mx-2 col-8 my-4">Submit</button>
+       
 
         @if (Model.IsEdit)
         {
@@ -102,17 +117,18 @@
             return true;       
         }
         const optionsGroup = document.querySelector('#options');
-        const addFieldButton = document.querySelector('#btnAddField');
+        let addFieldButton = document.querySelector('#btnAddField');
 
         addFieldButton.addEventListener("click", e => {
-            if (validateInput(document.getElementById("textAddField")))
-            {
-                const option = document.createElement("label");
-                option.classList.add('option');
-                option.setAttribute('Name', 'options');
-                option.innerHTML = document.getElementById("textAddField").value;
-                optionsGroup.append(option);
-            }
+            
+                let option = $("#options").children().first().clone();
+                let optionInput = option.children().first();
+                optionInput.removeAttr('value');
+                optionInput.removeAttr('name');
+                optionInput.attr('name', 'PollDto.Options[' + (optionsGroup.childElementCount) + '].Text');
+                optionInput.appendTo(option);
+                option.appendTo(optionsGroup);
+            
         });
 
     </script>
