@@ -10,5 +10,6 @@ namespace SuffrageApp.Models
     public class PollsViewModel
     {
         public List<PollDto> Polls { get; set; }
+        public PageViewModel PageViewModel { get; set; }
     }
 }

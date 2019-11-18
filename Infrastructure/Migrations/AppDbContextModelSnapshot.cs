@@ -26,6 +26,33 @@ namespace Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("AuthorId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("OptionId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PollId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
+
+                    b.HasIndex("OptionId");
+
+                    b.HasIndex("PollId");
+
+                    b.ToTable("Answers");
+                });
+
+            modelBuilder.Entity("Core.Entities.Option", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
                     b.Property<int?>("PollId")
                         .HasColumnType("int");
 
@@ -36,7 +63,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("PollId");
 
-                    b.ToTable("Answer");
+                    b.ToTable("Options");
                 });
 
             modelBuilder.Entity("Core.Entities.Poll", b =>
@@ -83,40 +110,28 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("User");
-                });
-
-            modelBuilder.Entity("Core.Entities.Vote", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("AnswerId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("AuthorId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("PollId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AnswerId");
-
-                    b.HasIndex("AuthorId");
-
-                    b.HasIndex("PollId");
-
-                    b.ToTable("Vote");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Core.Entities.Answer", b =>
                 {
+                    b.HasOne("Core.Entities.User", "Author")
+                        .WithMany("Answers")
+                        .HasForeignKey("AuthorId");
+
+                    b.HasOne("Core.Entities.Option", "Option")
+                        .WithMany()
+                        .HasForeignKey("OptionId");
+
                     b.HasOne("Core.Entities.Poll", null)
                         .WithMany("Answers")
+                        .HasForeignKey("PollId");
+                });
+
+            modelBuilder.Entity("Core.Entities.Option", b =>
+                {
+                    b.HasOne("Core.Entities.Poll", "Poll")
+                        .WithMany("Options")
                         .HasForeignKey("PollId");
                 });
 
@@ -125,21 +140,6 @@ namespace Infrastructure.Migrations
                     b.HasOne("Core.Entities.User", null)
                         .WithMany("Polls")
                         .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("Core.Entities.Vote", b =>
-                {
-                    b.HasOne("Core.Entities.Answer", "Answer")
-                        .WithMany()
-                        .HasForeignKey("AnswerId");
-
-                    b.HasOne("Core.Entities.User", "Author")
-                        .WithMany("Votes")
-                        .HasForeignKey("AuthorId");
-
-                    b.HasOne("Core.Entities.Poll", null)
-                        .WithMany("Votes")
-                        .HasForeignKey("PollId");
                 });
 #pragma warning restore 612, 618
         }

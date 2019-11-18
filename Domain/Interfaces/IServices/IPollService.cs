@@ -1,7 +1,6 @@
 ﻿using Core.Entities;
-using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace Core.Interfaces.Services
 {
@@ -12,7 +11,7 @@ namespace Core.Interfaces.Services
         /// </summary>
         /// <param name="id">Идентификатор опроса</param>
         /// <returns></returns>
-        Poll GetPoll(int id);
+        PollDto GetPoll(int id);
 
         /// <summary>
         /// Получить всех пользователей, учавствоваших в опросе
@@ -25,8 +24,28 @@ namespace Core.Interfaces.Services
         /// Получить все опросы
         /// </summary>
         /// <returns></returns>
-        public List<PollDto> GetAllPolls();
+        List<PollDto> GetPollsPage(int pollsOnPage, int page);
 
+        bool UpdatePoll(PollDto dto);
 
+        /// <summary>
+        /// Создание опроса и возврат идентификатора созданного опроса
+        /// </summary>
+        /// <param name="dto">Временная сущность создаваемого опроса</param>
+        /// <returns>Идентификатор созданного опроса</returns>
+        int CreatePollAndGetId(PollDto dto);
+
+        /// <summary>
+        /// Удалить опрос по идентификатору
+        /// </summary>
+        /// <param name="id">Идентификатор опроса</param>
+        /// <returns></returns>
+        bool DeletePoll(int id);
+
+        /// <summary>
+        /// Получить количество опросов в базе
+        /// </summary>
+        /// <returns></returns>
+        int GetPollsCount();
     }
 }

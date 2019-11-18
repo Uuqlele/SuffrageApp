@@ -14,8 +14,8 @@ using Core.Services;
 using Core.Interfaces.Services;
 using Infrastructure.Data;
 using Core.Interfaces.IRepositories;
-using Infrastructure;
 using Core.Mapping;
+using Infrastructure.Data.Repositories;
 
 namespace SuffrageApp
 {
@@ -42,8 +42,9 @@ namespace SuffrageApp
             services
                 .AddTransient<IPollRepository, PollRepository>()
                 .AddTransient<IPollService, PollService>()
-                .AddTransient<IVoteService, VoteService>(); 
-
+                .AddTransient<IAnswerService, AnswerService>()
+                .AddTransient<IAnswerRepository, AnswerRepository>()
+                .AddTransient<IOptionRepository, OptionRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

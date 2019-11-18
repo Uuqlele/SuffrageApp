@@ -2,5 +2,9 @@
   {
     "outputFile": "wwwroot/scss/custom.css",
     "inputFile": "wwwroot/scss/custom.scss"
+  },
+  {
+    "outputFile": "wwwroot/scss/WaveRadioButtons.css",
+    "inputFile": "wwwroot/scss/WaveRadioButtons.scss"
   }
 ]

@@ -20,7 +20,7 @@ namespace Core.Entities
         /// <summary>
         /// Все голоса пользователя, которые он выбрал в разных опросах
         /// </summary>
-        public List<Vote> Votes { get; set; }
+        public List<Answer> Answers { get; set; }
 
     }
 }

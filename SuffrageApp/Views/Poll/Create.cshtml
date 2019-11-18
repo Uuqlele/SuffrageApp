@@ -1,0 +1,120 @@
+﻿@model CreatePollViewModel
+
+@{
+    string EditOrCreateString = Model.IsEdit ? "Edit" : "Create";
+    ViewData["Title"] = EditOrCreateString;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<link rel="stylesheet" href="~/css/RadioButtons.css" />
+
+<div class="text-center mb-5 w-100">
+    <h1 class="display-4 text-truncate">@ViewData["Title"]</h1>
+</div>
+
+<div class="d-flex justify-content-center">
+
+    <form asp-action="@EditOrCreateString" method="post" class="row" style="width: 60vw">
+        <div class="col-8 border border-radius p-4 m-2 ">
+            <label class="control-label">Main info</label>
+            <div class="form-group">
+                <input asp-for="PollDto.Title" class="form-control form-control-lg roundedInput" placeholder="Title">
+                <span asp-validation-for="PollDto.Title" class="text-danger"></span>
+                <small id="emailHelp" class="form-text text-muted">Some text here.</small>
+            </div>
+            <div class="form-group">
+                <textarea asp-for="PollDto.Description" class="form-control roundedInput" style="min-height:125px" placeholder="Description"> </textarea>
+                <span asp-validation-for="PollDto.Description" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-3 border border-radius p-4 m-2 ">
+            <div class="form-group">
+                <label asp-for="PollDto.CreationDate" class="control-label">CreationDate</label>
+                <input asp-for="PollDto.CreationDate" value="@DateTime.Now" type="datetime" class="form-control roundedInput">
+                <span asp-validation-for="PollDto.CreationDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PollDto.StartDate" class="control-label">StartDate</label>
+                <input asp-for="PollDto.StartDate" value="@DateTime.Now.AddHours(1);" type="datetime" class="form-control roundedInput">
+                <span asp-validation-for="PollDto.StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PollDto.EndDate" class="control-label">EndDate</label>
+                <input asp-for="PollDto.EndDate" type="datetime" value="@DateTime.Now.AddDays(1)" class="form-control roundedInput">
+                <span asp-validation-for="PollDto.EndDate" class="text-danger"></span>
+            </div>
+        </div>
+
+
+
+        <div class="col-8 border border-radius m-2 p-4">
+            <label class="control-label">Options</label>
+            <div class="d-flex flex-column" id="options">
+                <div class="d-inline-flex align-content-center m-2">
+                    <div><i class="material-icons mr-1">delete</i></div>
+                    <input name="PollDto.Options[0].Text" value="Yes" class="form-control roundedInput col-form-label-sm">
+                </div>
+                <div class="d-inline-flex align-content-center m-2">
+                    <i class="material-icons mr-1">delete</i> 
+                    <input name="PollDto.Options[1].Text" value="NO"  class="form-control roundedInput col-form-label-sm">
+                </div>
+            </div>
+            <hr />
+            <div class="input-group mt-2">
+                <button type="button" class="btn btn-info btn-sm input-group-prepend rightRoundingNone" id="btnAddField"><i class="material-icons">add</i></button>
+                <input class="form-control bg-secondary border-0 roundedInput leftRoundingNone" placeholder="Text label" aria-label="Search" id="textAddField">
+            </div>
+        </div>
+
+
+
+
+        <div class="d-flex justify-content-center col-12">
+            <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+        </div>
+
+        @if (Model.IsEdit)
+        {
+            <input asp-for="@Model.PollDto.Id" value="@(Model.PollDto.Id)" class="form-control" type="hidden" />
+        }
+    </form>
+
+</div>
+
+@section Scripts {
+
+    <script>
+        function validateInput(input)
+        {
+            if (input.value.trim() === "") {
+                alert("Please enter a option name");
+                input.focus();
+                return false;
+            }
+            if (input.value !== "") {
+                if (input.value.length > 40) {
+                    alert("Please enter a option name no more than 40 characters");
+                    input.focus();
+                    return false;
+                }
+            }
+            return true;       
+        }
+        const optionsGroup = document.querySelector('#options');
+        const addFieldButton = document.querySelector('#btnAddField');
+
+        addFieldButton.addEventListener("click", e => {
+            if (validateInput(document.getElementById("textAddField")))
+            {
+                const option = document.createElement("label");
+                option.classList.add('option');
+                option.setAttribute('Name', 'options');
+                option.innerHTML = document.getElementById("textAddField").value;
+                optionsGroup.append(option);
+            }
+        });
+
+    </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

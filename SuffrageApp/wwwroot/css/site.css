@@ -1,15 +1,68 @@
-﻿/* bootstrap */
+﻿/* rounding */
+.btn {
+    border-bottom-right-radius: 20px !important;
+    border-top-right-radius: 20px !important;
+    border-bottom-left-radius: 20px !important;
+    border-top-left-radius: 20px !important;
+}
 
+.roundedInput {
+    background-color: #eceff1 !important;
+    border: 0 !important;
+    border-bottom-right-radius: 20px !important;
+    border-top-right-radius: 20px !important;
+    border-bottom-left-radius: 20px !important;
+    border-top-left-radius: 20px !important;
+}
+
+.border-radius {
+    border-radius: 20px !important;
+}
+
+.leftRoundingNone {
+    border-bottom-left-radius: 0px !important;
+    border-top-left-radius: 0px !important;
+}
+
+.rightRoundingNone {
+    border-bottom-right-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+}
+
+/* elements */
+.leftBackgroundBlock {
+    width: 20%;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    min-width: 120px;
+}
+
+.leftRoundedBlock {
+    border-radius: 20px !important;
+    background-image: url(/3.jpg);
+    height: 100%;
+}
+
+.rightBackgroundBlock {
+    width: 80%
+}
+
+
+
+
+/* animations */
 .list-group-item {
     position: relative;
-    border-bottom-left-radius: 15px !important;
-    border-top-left-radius: 15px !important;
+    border-bottom-left-radius: 20px !important;
+    border-top-left-radius: 20px !important;
     margin-top: 4px;
     border: 0px;
     display: flex;
-    transition: 1s all;
+    transition: 0.5s all;
     background-color: rgba(255, 255, 255, 0) !important;
     left: 0px;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.50);
 }
 
 .list-group-item:hover {
@@ -20,66 +73,72 @@
 
 .selected {
     background-color: rgba(255, 255, 255, 1) !important;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.0);
     color: black !important;
 }
 
-.selected:hover {
-    background-color: rgba(255, 255, 255, 1) !important;
-    color: black !important;
-    left:0;
-}
-
-.btn {
-    border-radius: 15px !important;
-}
-
-/* elements */
-.border-radius {
-    border-radius: 15px;
-}
-
-.leftBackgroundBlock {
-    width: 20%;
-    height: 100vh;
-    position: sticky;
-    top: 0
-}
-
-.leftRoundedBlock {
-    border-radius: 15px;
-    background-image: url(/3.jpg);
-    height: 100%;
-}
-
-.rightBackgroundBlock {
-    width: 80%
-}
+    .selected:hover {
+        background-color: rgba(255, 255, 255, 1) !important;
+        color: black !important;
+        left: 0;
+    }
 
 @keyframes fade-in {
     0% {
         color: white;
         background-color: rgba(255, 255, 255, 0.3);
-        left:40px;
+        box-shadow: none;
+        left: 40px;
+    }
+
+    30% {
+        box-shadow: none;
     }
 
     100% {
         color: black;
         background-color: rgba(255, 255, 255, 1);
+        box-shadow: -4px 9px 9px -8px rgba(0,0,0,0.5);
         left: 0px;
     }
 }
 
 .selected {
     animation: fade-in 0.5s ease;
+    box-shadow: -4px 9px 9px -8px rgba(0,0,0,0.5);
 }
 
 .card-1 {
-    transition: box-shadow 0.6s;
-    transition: display 0.6s;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.2s;
+    box-shadow: 0 0px 0px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    bottom: 0px;
+    left: 0px;
 }
 
-    .card-1:hover {
-        transition: box-shadow 0.6s;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-    }
+.card-1:hover {
+    transition: all 0.4s;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    bottom: 8px;
+    left: 0px;
+}
+
+.shadowHover {
+    transition: all 0.2s;
+    box-shadow: 0 0px 0px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.shadowHover:hover {
+    transition: all 0.4s;
+    box-shadow: 0 3px 4px rgba(0,0,0,0.19), 0 2px 4px rgba(0,0,0,0.23);
+}
+
+.overflow-multiply {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-height: 25px;
+    max-height: 73px;
+}
+
