@@ -16,6 +16,8 @@ using Infrastructure.Data;
 using Core.Interfaces.IRepositories;
 using Core.Mapping;
 using Infrastructure.Data.Repositories;
+using Infrastructure.Data.Identity;
+using Microsoft.AspNetCore.Identity;
 
 namespace SuffrageApp
 {
@@ -38,6 +40,9 @@ namespace SuffrageApp
                     {
                         o.UseSqlServer(Configuration.GetConnectionString("SuffrageAppDb"));
                     });
+
+            services.AddIdentity<IdentityAppUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>();
 
             services
                 .AddTransient<IPollRepository, PollRepository>()
@@ -64,7 +69,7 @@ namespace SuffrageApp
             app.UseStaticFiles();
             
             app.UseRouting();
-
+            
             app.UseAuthorization();
             app.UseAuthentication();
 

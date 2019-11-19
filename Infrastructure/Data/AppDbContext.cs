@@ -1,11 +1,13 @@
 ﻿using Core.Entities;
+using Infrastructure.Data.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 
 namespace Infrastructure.Data
 {
-    public class AppDbContext : Microsoft.EntityFrameworkCore.DbContext
+    public class AppDbContext : IdentityDbContext<IdentityAppUser>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
@@ -15,7 +17,7 @@ namespace Infrastructure.Data
         public DbSet<Poll> Polls { get; set; }
         public DbSet<Option> Options { get; set; }
         public DbSet<Answer> Answers { get; set; }
-        public DbSet<User> Users { get; set; }
+        //public DbSet<User> Users { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

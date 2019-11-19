@@ -1,8 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@using SuffrageApp.Areas.Identity.Data
+@using Infrastructure.Data.Identity
 
-@inject SignInManager<User> SignInManager
-@inject UserManager<User> UserManager
+@inject SignInManager<IdentityAppUser> SignInManager
+@inject UserManager<IdentityAppUser> UserManager
 
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
